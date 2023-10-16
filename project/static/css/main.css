@@ -1,0 +1,69 @@
+
+body{
+    background-image: url('../image/bg_img-2.jpeg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+} 
+.img-thumbnail {
+    margin-top: 100px;
+    padding: .25rem;
+    background-color: #0c709b5b; 
+    border: 1px solid #07090a; 
+    border-radius : 22.25rem;
+    max-width: 100%;
+    height: 25%;
+}
+
+p{
+    color: white;
+    font-size: large;
+}
+
+*{
+    cursor: auto;
+    box-sizing: border-box;
+}
+body{
+    background-image: url('../image/bg_img-2.jpeg');
+    background-size: 100%;
+} 
+.bgbox{
+    width: 1200px;
+    height: 480px;
+    background-color: rgba(239, 254, 255, 0.808);
+    border-radius: 12px;
+    box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.2);
+}
+.carim{
+    width: 50%;
+    height: 10px;
+}
+.image1{
+    cursor: pointer;
+    text-decoration: none;
+    user-select: none;
+    caret-color: transparent;
+}
+
+*{
+    cursor: auto;
+}
+body{
+    background-image: url('../image/bg_img-2.jpeg');
+    background-size: 100%;
+} 
+.bgbox{
+    background-color: rgba(239, 254, 255, 0.808);
+    border-radius: 12px;
+    box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.2);
+}
+.carim{
+    width: 50%;
+    height: 10px;
+}
+.image1{
+    cursor: pointer;
+    text-decoration: none;
+    user-select: none;
+    caret-color: transparent;
+}

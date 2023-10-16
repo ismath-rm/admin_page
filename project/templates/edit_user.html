@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block body %}
+<section class="h-100">
+
+    <div class="row">
+        <div class="col">
+        1 of 3
+        </div>
+        <div class="col-6 d-flex flex-column justify-content-center">
+            <form method="post">
+      
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-6">
+                        <label for="" class="text-light form-label"> First name</label>
+                        {{form.first_name}}
+
+                    </div>
+                    <div class="col-6 mb-3">
+                        <label for="" class="text-light form-label"> Last name</label>
+                        {{form.last_name}}
+
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label for="" class="text-light form-label"> Username</label>
+                        {{form.username}}
+
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label for="" class="text-light form-label"> Email</label>
+                        {{form.email}}
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label for="" class="text-light form-label"> Is Active</label>
+                        {{form.is_active}}
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label for="" class="text-light form-label"> Is superuser</label>
+                        {{form.is_superuser}}
+                    </div>
+                    <div class="col-12 d-flex justify-content-center mb-3">
+                        <button type="submit" class="btn btn-primary" >Update user</button>
+                    </div>
+                    
+                </div>
+            </form>
+        </div>
+        <div class="col">
+        3 of 3
+        </div>
+    </div>
+</section>
+
+{% endblock %}

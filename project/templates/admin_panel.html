@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- datatable css -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" integrity="sha384-PJsj/BTMqILvmcej7ulplguok8ag4xFTPryRq8xevL7eBYSmpXKcbNVuy+P0RMgq" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <title>Admin_panel</title>
+  </head>
+  <body>
+    <style>
+      .navbar {
+        height: 40px;
+      }
+    </style>
+
+    <div class="navbar bg-black d-flex justify-content-between align-items-center">
+      <span class="text-light text-opacity-75 shadow-lg mx-auto">ADMIN PANEL</span>
+      <div>
+        <a href="/admin_logout" class="btn btn-outline-light ms-3" style="--bs-btn-padding-y: .40rem; --bs-btn-padding-x: 1rem; --bs-btn-font-size: .79rem;">LOGOUT</a>
+      </div>
+    </div>
+
+    <div class="container mt-5">
+      <div class="row">
+        <div class="box1 col-md-5">
+          <div class="bg-black bg-opacity-50 border-4 ms-0 pe-5 py-4 ps-5 position-relative">
+            <h5 class="mt- mb-2 text-light text-center">Add new user</h5>
+            <div aria-live="polite" aria-atomic="true" class="toast-container position-fixed top-0 start-0 p-3" id="toastPlacement">
+              
+              {% for message in messages %}
+                <div class="toast align-items-center text-white bg-{{ message.tags }} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div class="d-flex">
+                    <div class="toast-body">
+                      {{ message }}
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+
+            <form action="{% url 'add_user'%}" method="post">
+              {% csrf_token %}
+              <div class="mb-1">
+                <label for="exampleInputEmail1" class="form-label text-light mb-0">Username</label>
+                <input type="username" class="form-control" name="username" Required />
+              </div>
+              <div class="mb-1">
+                <label for="exampleInputEmail1" class="form-label text-light mb-0">Email address</label>
+                <input type="email" class="form-control" name="email" aria-describedby="emailHelp" Required />
+              </div>
+              <div class="mb-1">
+                <label for="exampleInputPassword1" class="form-label text-light mb-0">Password</label>
+                <input type="password" class="form-control" name="password" Required />
+                <span id="passwordHelpInline" class="form-text text-light">Must be 8-20 characters long.</span>
+              </div>
+              <div class="d-flex justify-content-center ps-5">
+                <button type="submit" class="btn btn-outline-light mt-3 me-5 px-5">submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="bg-black bg-opacity-50 col-md-7 me-0">
+          <h4 class="text-light text-center">USER DETAILS</h4>
+          {% comment %} <table class="table table-dark table-bordered border-light"> {% endcomment %}
+          <div class="table-responsive text-light ">
+            <table id="usertable" class="table table-dark table-bordered border-light">
+                <thead>
+                    <tr class="table-active">
+                        <th>#</th>
+                        <th>Username</th>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Email</th>
+                        <th>Active status</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for user in data %}
+                    <tr>
+                        <th>{{forloop.counter}}</th>
+                        <td>
+                            <a href="{% url 'edit_user' user.id %}">
+                            {{user.username}}
+                          </a>
+                        </td>
+                        <td>{{user.first_name}}</td>
+                        <td>{{user.last_name}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.is_active}}</td>
+                        <td><a href="{% url 'delete_user' user.id %}" class="btn btn-outline-danger">Delete</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // Get all the toasts
+        var toastElements = document.querySelectorAll('.toast');
+    
+        // Loop through each toast element
+        toastElements.forEach(function (toastEl) {
+          // Create a new Bootstrap Toast object
+          var toast = new bootstrap.Toast(toastEl);
+    
+          // Show the toast
+          toast.show();
+    
+          // Automatically hide the toast after 3 seconds (adjust the time as needed)
+          setTimeout(function () {
+            toast.hide();
+          }, 5000);
+        });
+      });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+      $(document).ready(function () {
+          $('#usertable').DataTable();
+      });
+    </script>
+  </body>
+</html>
