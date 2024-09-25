@@ -1,5 +1,18 @@
 {% extends 'base.html' %}
 {% block title %}Home{% endblock title %}
+
 {% block body %}
-<center><h1 class="text-light">this is my home page</h1></center>
+<center>
+
+    <!-- Check if the user is authenticated -->
+    {% if user.is_authenticated %}
+        <!-- Display welcome message for authenticated users -->
+        <h2 class="text-light">Welcome, {{ request.user }}!</h2>
+    {% else %}
+        <!-- Display message for non-authenticated users -->
+        <h1 class="text-light">This is the home page</h1>
+        <h2 class="text-light">Welcome, Guest!</h2>
+    {% endif %}
+
+</center>
 {% endblock body %}
